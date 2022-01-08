@@ -16,6 +16,7 @@ contract Blitter is Ownable {
 
     Bleet[] public bleets;
     mapping(bytes32 => uint256[]) public hashtags;
+    mapping(address => uint256[]) public userBleets;
     mapping(address => uint256) public balance;
     mapping(address => bytes32) public usernames;
 
@@ -79,5 +80,14 @@ contract Blitter is Ownable {
 
     function getBleets() external view returns (Bleet[] memory) {
         return bleets;
+    }
+
+    function getUserBleets(address userAddress) external view returns (uint256[] memory) {
+        return userBleets[userAddress];
+    }
+
+    function getHashtagBleets(bytes32 hashtag) external view returns (uint256[] memory)
+    {
+        return hashtags[hashtag];
     }
 }

@@ -50,5 +50,29 @@ describe('Blitter contract', () => {
             const bleetsAfterNewBleet = await blitter.getBleets();
             expect(bleetsAfterNewBleet.length).to.equal(1);
         });
+
+        it('Should add the bleet id to each hashtag', async () => {
+            const content = "This is the content of the Bleet, which should be ok";
+            const bleet = {
+                hashtags: [
+                    ethers.utils.formatBytes32String('clothing'),
+                    ethers.utils.formatBytes32String('videogames'),
+                ],
+                gif: ethers.utils.formatBytes32String('loool'),
+                content: ethers.utils.toUtf8Bytes(content)
+            };
+
+            await blitter.newBleet(bleet.hashtags, bleet.gif, bleet.content);
+            
+            const clothing = await blitter.getHashtagBleets(
+                ethers.utils.formatBytes32String('clothing')
+            );
+
+            const videogames = await blitter.getHashtagBleets(
+                ethers.utils.formatBytes32String('videogames')
+            );
+
+            expect(clothing[0]).to.equal(videogames[0]);
+        });
     });
 });

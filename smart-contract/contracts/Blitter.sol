@@ -74,5 +74,10 @@ contract Blitter is Ownable {
     function tip(uint256 id) external payable {
         (bool success, ) = payable(bleets[id].author).call{value: msg.value}("");
         require(success);
+        emit BleetTipped(id, msg.sender, msg.value);
+    }
+
+    function getBleets() external view returns (Bleet[] memory) {
+        return bleets;
     }
 }

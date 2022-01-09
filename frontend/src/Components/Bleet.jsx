@@ -1,17 +1,21 @@
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext } from "react";
+import { BlitterContext } from "../Context/BlitterContext";
 import { shortAddress } from "../Helpers";
 import Avatar from "./Avatar/Avatar";
 import TipAction from "./TipAction/TipAction";
 
 
 const Bleet = (props) => {
+    const { connectWallet } = useContext(BlitterContext);
+
     return (
         <div className='flex pt-4 px-4'>
             <Avatar address={props.address} />
             <div className="px-2 pt-2 flex-grow">
             <header>
-                <a href="" className="no-underline">
+                <a onClick={() => connectWallet()} className="no-underline">
                 <span className="font-medium">{shortAddress(props.bleet.address)}</span>
                 <span className="ml-2 font-normal text-gray-400">@{ props.bleet.username }</span>
                 </a>

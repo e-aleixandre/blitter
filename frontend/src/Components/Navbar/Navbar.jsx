@@ -1,7 +1,13 @@
-import { faSearch, faWallet } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext } from "react";
+import { BlitterContext } from "../../Context/BlitterContext";
+import ConnectAccount from "../ConnectAccount/ConnectAccount";
 
 const Navbar = () => {
+
+    const { currentAccount } = useContext(BlitterContext);
+
     return (
         <nav className='flex justify-between px-20 py-10 items-center bg-white'>
             <h1 className="text-xl text-gray-800 font-bold">Blitter</h1>
@@ -18,14 +24,7 @@ const Navbar = () => {
                         Last tips
                     </li>
                     <li className="font-semibold text-gray-700">
-                        <button className="flex items-center p-4 bg-indigo-200 rounded-lg shadow-xs cursor-pointer hover:bg-indigo-500 hover:text-gray-100">
-                            <FontAwesomeIcon icon={faWallet} className="h-6 fill-current hover:text-gray-100"/>
-                            <div>
-                                <p className="text-xs font-medium ml-2">
-                                    Connect
-                                </p>
-                            </div>
-                        </button>
+                        <ConnectAccount />
                     </li>
                 </ul>
             </div>

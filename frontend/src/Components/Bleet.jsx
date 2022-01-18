@@ -15,7 +15,7 @@ const Bleet = (props) => {
             <Avatar address={props.address} />
             <div className="px-2 pt-2 flex-grow">
             <header>
-                <a onClick={() => connectWallet()} className="no-underline">
+                <a href="" className="no-underline">
                 <span className="font-medium">{shortAddress(props.bleet.address)}</span>
                 <span className="ml-2 font-normal text-gray-400">@{ props.bleet.username }</span>
                 </a>

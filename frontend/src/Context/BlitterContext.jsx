@@ -15,14 +15,22 @@ const getEthereumContract = () => {
 
 export const BlitterProvider = ({ children }) => {
 
-    const [connectedAccount, setConnectedAccount] = useState('');
+    const [currentAccount, setCurrentAccount] = useState('');
 
     const isWalletConnected = async () => {
-        if (!ethereum)
-            return alert("Please connect metamask");
-
-        const accounts = await ethereum.request({ method: 'eth_accounts' });
-        console.log(accounts);
+        try {
+            if (!ethereum)
+                return alert("Please connect metamask");
+    
+            const accounts = await ethereum.request({ method: 'eth_accounts' });
+            
+            if (accounts.length)
+                setCurrentAccount(accounts[0]);
+            else
+                console.log("No accounts found");
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     const connectWallet = async () => {
@@ -45,7 +53,7 @@ export const BlitterProvider = ({ children }) => {
     }, []);
 
     return (
-        <BlitterContext.Provider value={{ connectWallet }}>
+        <BlitterContext.Provider value={{ connectWallet, currentAccount }}>
             { children }
         </BlitterContext.Provider>
     )

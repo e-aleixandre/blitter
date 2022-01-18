@@ -59,6 +59,9 @@ contract Blitter is Ownable {
             hashtags[_hashtags[hashtags_index]].push(index);
         }
 
+        // Push the Bleet index to the user bleets array
+        userBleets[msg.sender].push(index);
+
         emit BleetCreated(index, msg.sender, _hashtags, _gif, _content);
     }
 

@@ -74,5 +74,23 @@ describe('Blitter contract', () => {
 
             expect(clothing[0]).to.equal(videogames[0]);
         });
+
+        it('Should add the bleet id to the user bleets', async () => {
+            const content = "This is the content of the Bleet, which should be ok";
+            const bleet = {
+                hashtags: [],
+                gif: ethers.utils.formatBytes32String('loool'),
+                content: ethers.utils.toUtf8Bytes(content)
+            };
+
+            const tx = await blitter.newBleet(bleet.hashtags, bleet.gif, bleet.content);
+            const receipt = await tx.wait();
+
+            const newId = receipt.events[0].args.id.toNumber();
+
+            const userBleets = await blitter.getUserBleets(owner.address);
+            
+            expect(userBleets[0]).to.equal(newId);
+        });
     });
 });

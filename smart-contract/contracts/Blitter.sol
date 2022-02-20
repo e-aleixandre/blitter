@@ -17,7 +17,7 @@ contract Blitter is Ownable {
     Bleet[] public bleets;
     mapping(bytes32 => uint256[]) public hashtags;
     mapping(address => uint256[]) public userBleets;
-    mapping(address => uint256) public balance;
+    mapping(address => uint256) public balances;
     mapping(address => bytes32) public usernames;
 
     event BleetCreated(

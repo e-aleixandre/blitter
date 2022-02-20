@@ -14,10 +14,11 @@ const App = () => {
   const [count, setCount] = useState(0);
   const address = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266';
 
-  return ([
-    <Navbar />,
-    <Feed />
-  ]);
+  return (<>
+            <Navbar />
+            <Feed />
+          </>
+  );
 }
 
 export default App

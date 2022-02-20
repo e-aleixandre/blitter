@@ -5,7 +5,7 @@ import { BlitterContext } from "../../Context/BlitterContext"
 
 const ConnectAccount = () => {
 
-    const { connectWallet } = useContext(BlitterContext);
+    const { connectWallet, postBleet } = useContext(BlitterContext);
 
     return (
         <button onClick={() => connectWallet()} className="flex items-center p-4 bg-indigo-200 rounded-lg shadow-xs cursor-pointer hover:bg-indigo-500 hover:text-gray-100">

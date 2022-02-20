@@ -6,7 +6,7 @@ import ConnectAccount from "../ConnectAccount/ConnectAccount";
 
 const Navbar = () => {
 
-    const { currentAccount } = useContext(BlitterContext);
+    const { currentAccount, postBleet } = useContext(BlitterContext);
 
     return (
         <nav className='flex justify-between px-20 py-10 items-center bg-white'>
@@ -17,14 +17,14 @@ const Navbar = () => {
                     <input type="text" placeholder="Search..." className="ml-2 outline-none bg-transparent border-0 focus:ring-0" />
                 </div>
                 <ul className="flex items-center space-x-6">
-                    <li className="font-semibold text-gray-700">
+                    <li onClick={() => postBleet() } className="font-semibold text-gray-700">
                         Home
                     </li>
                     <li className="font-semibold text-gray-700">
                         Last tips
                     </li>
                     <li className="font-semibold text-gray-700">
-                        <ConnectAccount />
+                        { !currentAccount && <ConnectAccount /> }
                     </li>
                 </ul>
             </div>

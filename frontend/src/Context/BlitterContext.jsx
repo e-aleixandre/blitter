@@ -10,7 +10,8 @@ const getEthereumContract = () => {
     const provider = new ethers.providers.Web3Provider(ethereum);
     const signer = provider.getSigner();
     const blitterContract = new ethers.Contract(blitterAddress, blitterAbi, signer);
-    console.log(provider, signer, blitterContract);
+    
+    return blitterContract;
 }
 
 export const BlitterProvider = ({ children }) => {
@@ -43,17 +44,37 @@ export const BlitterProvider = ({ children }) => {
             setCurrentAccount(accounts[0]);
         } catch (error) {
             console.error(error);
-
-            throw new Error('No ethereum object');
         }
     }
 
-    useEffect(() => {
+    const getBleets = async () => {
+        try {
+            const contract = getEthereumContract();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const postBleet = async (bleet) => {
+        console.log("inside PostBleet");
+        try {
+            const contract = getEthereumContract();
+            await contract.newBleet(
+                [ethers.utils.formatBytes32String("hashtagtest")],
+                ethers.utils.formatBytes32String("image"),
+                ethers.utils.toUtf8Bytes("This is the content of the Bleet ;)")
+            );
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    /* useEffect(() => {
         isWalletConnected(); 
-    }, []);
+    }, []); */
 
     return (
-        <BlitterContext.Provider value={{ connectWallet, currentAccount }}>
+        <BlitterContext.Provider value={{ connectWallet, currentAccount, postBleet }}>
             { children }
         </BlitterContext.Provider>
     )
